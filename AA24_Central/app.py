@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory
 
 app = Flask(__name__)
 
@@ -9,6 +9,7 @@ TECNICOS_RFID = {
     "0009123845": {"nome": "Miguel Rocha", "telemovel": "+351961234567", "veiculo": "Master 01"}
 }
 
+# Lista de serviços pendentes na central
 ocorrencias_pendentes = [
     {
         "id": 104,
@@ -26,9 +27,18 @@ ocorrencias_pendentes = [
 def index():
     return render_template('index.html', ocorrencias=ocorrencias_pendentes)
 
+@app.route('/favicon.ico')
+def favicon():
+    # Serve o logótipo da pasta static como ícone do site sem gerar erro 404
+    static_dir = os.path.join(app.root_path, 'static')
+    logo_path = os.path.join(static_dir, 'logo.png')
+    if os.path.exists(logo_path):
+        return send_from_directory(static_dir, 'logo.png', mimetype='image/png')
+    return '', 204
+
 @app.route('/processar_rfid', methods=['POST'])
 def processar_rfid():
-    data = request.json
+    data = request.json or {}
     tag_rfid = data.get('rfid_tag', '').strip()
     modo = data.get('modo')
     id_servico = data.get('id_servico')

@@ -9,7 +9,7 @@ TECNICOS_RFID = {
     "0009123845": {"nome": "Miguel Rocha", "telemovel": "+351961234567", "veiculo": "Master 01"}
 }
 
-ocorrências_pendentes = [
+ocorrencias_pendentes = [
     {
         "id": 104,
         "cliente": "João Silva",
@@ -24,7 +24,7 @@ ocorrências_pendentes = [
 
 @app.route('/')
 def index():
-    return render_template('index.html', ocorrencias=ocorrências_pendentes)
+    return render_template('index.html', ocorrencias=ocorrencias_pendentes)
 
 @app.route('/processar_rfid', methods=['POST'])
 def processar_rfid():
@@ -44,7 +44,7 @@ def processar_rfid():
         })
 
     elif modo == 'CHAMADO':
-        servico = next((s for s in ocorrências_pendentes if s["id"] == int(id_servico)), None)
+        servico = next((s for s in ocorrencias_pendentes if s["id"] == int(id_servico)), None)
         if not servico:
             return jsonify({"status": "error", "mensagem": "Serviço não encontrado!"}), 400
 

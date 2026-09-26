@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AA24 - Painel de Despacho</title>
+    <title>AA24 - AlgarveAssist 24</title>
+    <link rel="icon" href="/favicon.ico" type="image/png">
     <style>
         body { font-family: Arial, sans-serif; background: #121212; color: white; text-align: center; margin: 0; padding: 20px; }
         .container { max-width: 800px; margin: auto; }
+        .logo { max-width: 200px; max-height: 100px; margin-bottom: 15px; object-fit: contain; }
         .btn { padding: 20px 30px; font-size: 18px; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; margin: 10px; }
         .btn-chamado { background: #ff9800; color: black; }
         .btn-ponto { background: #2196F3; color: white; }
@@ -19,7 +21,9 @@
 <body>
 
 <div class="container">
-    <h2>ALGARVEASSIST 24 — PAINEL WEB DE TESTES</h2>
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="AlgarveAssist 24" class="logo" onerror="this.style.display='none'">
+
+    <h2>ALGARVEASSIST 24 — PAINEL DE DESPACHO</h2>
 
     <div>
         <button id="btnChamado" class="btn btn-chamado active" onclick="setModo('CHAMADO')">🚀 ASSUMIR CHAMADO</button>
@@ -38,7 +42,7 @@
     </div>
 
     <br>
-    <label>Simulador de Leitor RFID (Digita o código e calca Enter):</label><br>
+    <label>Simulador de Leitor RFID (Digita o código e prime Enter):</label><br>
     <input type="text" id="rfid_input" placeholder="Ex: 0008392104" autofocus>
 
     <div id="status">👉 Seleciona a opção e insere o código do cartão</div>
